@@ -1,1 +1,415 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đánh giá bài thuyết trình của Kenny</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #050505;
+      color: white;
+      overflow: hidden;
+    }
+
+    /* RGB background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -50%;
+      background:
+        linear-gradient(
+          45deg,
+          #ff0000,
+          #ff00ff,
+          #0000ff,
+          #00ffff,
+          #00ff00,
+          #ffff00,
+          #ff0000
+        );
+      background-size: 400% 400%;
+      animation: rgb 8s linear infinite;
+      filter: blur(80px);
+      opacity: 0.45;
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: -1;
+    }
+
+    @keyframes rgb {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .container {
+      width: 90%;
+      max-width: 550px;
+      padding: 35px;
+      border-radius: 25px;
+      background: rgba(15, 15, 15, 0.9);
+      border: 2px solid transparent;
+      position: relative;
+      box-shadow:
+        0 0 15px #ff00ff,
+        0 0 35px #00ffff,
+        0 0 70px rgba(255, 0, 255, 0.3);
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 25px;
+      padding: 2px;
+      background: linear-gradient(
+        90deg,
+        red,
+        orange,
+        yellow,
+        lime,
+        cyan,
+        blue,
+        magenta,
+        red
+      );
+      background-size: 400%;
+      animation: borderRGB 5s linear infinite;
+
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+
+      pointer-events: none;
+    }
+
+    @keyframes borderRGB {
+      0% {
+        background-position: 0%;
+      }
+      100% {
+        background-position: 400%;
+      }
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 10px;
+      background: linear-gradient(
+        90deg,
+        red,
+        orange,
+        yellow,
+        lime,
+        cyan,
+        blue,
+        magenta
+      );
+      background-size: 400%;
+      animation: textRGB 5s linear infinite;
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @keyframes textRGB {
+      0% {
+        background-position: 0%;
+      }
+      100% {
+        background-position: 400%;
+      }
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 25px;
+    }
+
+    .stars {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .star {
+      font-size: 55px;
+      color: #555;
+      cursor: pointer;
+      transition: 0.2s;
+      user-select: none;
+      text-shadow: none;
+    }
+
+    .star:hover {
+      transform: scale(1.15);
+    }
+
+    .star.active {
+      color: #ffd700;
+      text-shadow:
+        0 0 5px #ffd700,
+        0 0 15px #ffd700,
+        0 0 30px #ffae00;
+    }
+
+    .rating-text {
+      text-align: center;
+      font-size: 17px;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 130px;
+      resize: none;
+      border: 2px solid #333;
+      border-radius: 15px;
+      padding: 15px;
+      background: #0d0d0d;
+      color: white;
+      font-size: 15px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    textarea:focus {
+      border-color: #00ffff;
+      box-shadow:
+        0 0 10px #00ffff,
+        0 0 25px rgba(0, 255, 255, 0.3);
+    }
+
+    textarea::placeholder {
+      color: #777;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+
+      background: linear-gradient(
+        90deg,
+        #ff0000,
+        #ff00ff,
+        #0000ff,
+        #00ffff,
+        #00ff00
+      );
+
+      background-size: 300%;
+      animation: buttonRGB 4s linear infinite;
+
+      box-shadow:
+        0 0 10px rgba(0, 255, 255, 0.5),
+        0 0 25px rgba(255, 0, 255, 0.3);
+
+      transition: 0.2s;
+    }
+
+    @keyframes buttonRGB {
+      0% {
+        background-position: 0%;
+      }
+      100% {
+        background-position: 300%;
+      }
+    }
+
+    button:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .thanks {
+      text-align: center;
+      margin-top: 20px;
+      color: #00ffff;
+      display: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 25px 20px;
+      }
+
+      h1 {
+        font-size: 23px;
+      }
+
+      .star {
+        font-size: 45px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Đánh giá bài thuyết trình của Kenny</h1>
+
+    <p class="subtitle">
+      Hãy đánh giá bài thuyết trình của tôi ⭐
+    </p>
+
+    <div class="stars">
+      <span class="star" data-value="1">★</span>
+      <span class="star" data-value="2">★</span>
+      <span class="star" data-value="3">★</span>
+      <span class="star" data-value="4">★</span>
+      <span class="star" data-value="5">★</span>
+    </div>
+
+    <div class="rating-text">
+      Bạn chưa chọn số sao
+    </div>
+
+    <textarea
+      id="comment"
+      placeholder="Hãy để lại nhận xét của bạn..."
+    ></textarea>
+
+    <button onclick="submitReview()">
+      GỬI ĐÁNH GIÁ 🚀
+    </button>
+
+    <div class="thanks" id="thanks">
+      Cảm ơn bạn đã đánh giá! ❤️
+    </div>
+
+  </div>
+
+  <script>
+
+    const stars = document.querySelectorAll(".star");
+    const ratingText = document.querySelector(".rating-text");
+
+    let rating = 0;
+
+    const ratingMessages = {
+      1: "⭐ 1 sao - Cần cải thiện",
+      2: "⭐⭐ 2 sao - Khá ổn",
+      3: "⭐⭐⭐ 3 sao - Tốt",
+      4: "⭐⭐⭐⭐ 4 sao - Rất tốt",
+      5: "⭐⭐⭐⭐⭐ 5 sao - Tuyệt vời!"
+    };
+
+    stars.forEach(star => {
+
+      star.addEventListener("click", () => {
+
+        rating = Number(star.dataset.value);
+
+        stars.forEach(s => {
+          const value = Number(s.dataset.value);
+
+          if (value <= rating) {
+            s.classList.add("active");
+          } else {
+            s.classList.remove("active");
+          }
+        });
+
+        ratingText.textContent = ratingMessages[rating];
+
+      });
+
+      star.addEventListener("mouseenter", () => {
+
+        const value = Number(star.dataset.value);
+
+        stars.forEach(s => {
+          const starValue = Number(s.dataset.value);
+
+          if (starValue <= value) {
+            s.style.color = "#ffd700";
+          } else {
+            s.style.color = "#555";
+          }
+        });
+
+      });
+
+      star.addEventListener("mouseleave", () => {
+
+        stars.forEach(s => {
+
+          if (Number(s.dataset.value) <= rating) {
+            s.style.color = "#ffd700";
+          } else {
+            s.style.color = "#555";
+          }
+
+        });
+
+      });
+
+    });
+
+    function submitReview() {
+
+      const comment = document.getElementById("comment").value.trim();
+      const thanks = document.getElementById("thanks");
+
+      if (rating === 0) {
+        alert("Vui lòng chọn số sao trước nhé!");
+        return;
+      }
+
+      thanks.style.display = "block";
+
+      console.log({
+        rating: rating,
+        comment: comment
+      });
+
+    }
+
+  </script>
+
+</body>
+</html>
